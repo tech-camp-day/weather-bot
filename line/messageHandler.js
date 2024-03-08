@@ -1,4 +1,5 @@
 const { reply, send } = require('./messageSender');
+
 const { 
   createUser,
   updateUser,
@@ -10,7 +11,7 @@ const {
 } = require('../data/db');
 
 /**
- * จัดการกับเหตุการณ์ที่เข้ามา, ตรวจสอบประเภทของเหตุการณ์และส่งไปยังฟังก์ชันที่เหมาะสม
+ * จัดการกับเหตุการณ์ที่เข้ามา ตรวจสอบประเภทของเหตุการณ์ และส่งไปยังฟังก์ชันที่เหมาะสม
  * @param {object} event - อ็อบเจ็กต์เหตุการณ์
  */
 function handleEvent(event) {
@@ -29,17 +30,29 @@ function handleEvent(event) {
   }
 }
 
+/**
+ * จัดการกับเหตุการณ์ 'follow'
+ * @param {object} event - อ็อบเจ็กต์เหตุการณ์
+ */
 function handleFollow(event) {
-  reply(event.replyToken, 'สวัสดีครับ ผมคือ Weather Bot คุณสามารถเลือกจังหวัดที่ต้องการรับข้อมูลอากาศได้เลยครับ', 'คุณพี่อยู่จังหวัดอะไรครับ?');
+  reply(event, 'สวัสดีครับ ผมคือ Weather Bot คุณสามารถเลือกจังหวัดที่ต้องการรับข้อมูลอากาศได้เลยครับ', 'คุณพี่อยู่จังหวัดอะไรครับ?');
 }
 
+/**
+ * จัดการกับเหตุการณ์ 'unfollow'
+ * @param {object} event - อ็อบเจ็กต์เหตุการณ์
+ */
 function handleUnfollow(event) {
   deleteUser(event.source.userId);
 }
 
+/**
+ * จัดการกับเหตุการณ์ 'message'
+ * @param {object} event - อ็อบเจ็กต์เหตุการณ์
+ */
 function handleMessage(event) {
   if (event.message.type !== 'text') {
-    reply(event.replyToken, 'ขอโทษครับ ผมไม่เข้าใจข้อความที่คุณส่งมา');
+    reply(event, 'ขอโทษครับ ผมไม่เข้าใจข้อความที่คุณส่งมา');
   }
 
   const newProvince = searchProvinceByName(event.message.text);
@@ -49,13 +62,13 @@ function handleMessage(event) {
 
     if (currentProvince) {
       updateUser(event.source.userId, newProvince.id);
-      reply(event.replyToken, `เปลี่ยนจากจังหวัด${currentProvince.name}เป็นจังหวัด${newProvince.name} เรียบร้อย ผมจะส่งข้อมูลอากาศให้คุณทุกวันครับ`);
+      reply(event, `เปลี่ยนจากจังหวัด${currentProvince.name}เป็นจังหวัด${newProvince.name} เรียบร้อย ผมจะส่งข้อมูลอากาศให้คุณทุกวันครับ`);
     } else {
       createUser(event.source.userId, newProvince.id);
-      reply(event.replyToken, `เลือกจังหวัด${newProvince.name}เรียบร้อย ผมจะส่งข้อมูลอากาศให้คุณทุกวันครับ`);
+      reply(event, `เลือกจังหวัด${newProvince.name}เรียบร้อย ผมจะส่งข้อมูลอากาศให้คุณทุกวันครับ`);
     }
   } else {
-    reply(event.replyToken, 'ขอโทษครับ ผมไม่พบข้อมูลจังหวัดที่คุณส่งมา');
+    reply(event, 'ขอโทษครับ ผมไม่พบข้อมูลจังหวัดที่คุณส่งมา');
   }
 }
 
