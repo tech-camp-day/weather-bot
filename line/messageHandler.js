@@ -72,4 +72,7 @@ function handleMessage(event) {
   }
 }
 
+// todo: cron every hour to check bad weather in the next hour
+// todo: cron daily to report today's weather forecast
+
 module.exports = { handleEvent };
