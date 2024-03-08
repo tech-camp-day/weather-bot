@@ -39,6 +39,16 @@ function updateUser(lineUserId, provinceId) {
   updateUser.run(provinceId, lineUserId);
 }
 
+function deleteUser(lineUserId) {
+  const deleteUser = db.prepare('delete from users where lineUserId = ?');
+  deleteUser.run(lineUserId);
+}
+
+function getCurrentProvinceNameOfUser(lineUserId) {
+  const selectUser = db.prepare('select p.name from provinces p join users u on p.id = u.provinceId where u.lineUserId = ?');
+  return selectUser.get(lineUserId);
+}
+
 function searchProvinceByName(name) {
   const selectProvince = db.prepare('select id, name from provinces where name = ?');
   return selectProvince.get(name);
@@ -57,6 +67,8 @@ function getUserByProvinceId(provinceId) {
 module.exports = {
   createUser,
   updateUser,
+  deleteUser,
+  getCurrentProvinceNameOfUser,
   searchProvinceByName,
   getProvincesThatHasUser,
   getUserByProvinceId
