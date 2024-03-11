@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-bot-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: weather-bot
+  template:
+    metadata:
+      labels:
+        app: weather-bot
+    spec:
+      containers:
+      - name: weather-bot
+        image: ${IMAGE}
+        ports:
+        - containerPort: 3000
+        env:
+          - name: LINE_CHANNEL_ACCESS_TOKEN
+            value: ${LINE_CHANNEL_ACCESS_TOKEN}
+          - name: LINE_CHANNEL_SECRET
+            value: ${LINE_CHANNEL_SECRET}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-bot-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 3000
+  selector:
+    app: weather-bot
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: weather-bot-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  tls:
+  - hosts: [${DOMAIN}]
+    secretName: weather-bot-tls
+  rules:
+    - host: ${DOMAIN}
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: weather-bot-service
+                port:
+                  number: 80
