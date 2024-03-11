@@ -1,4 +1,6 @@
-const db = require("better-sqlite3")("weather-bot.db", { verbose: console.log });
+const db = require("better-sqlite3")("weather-bot.db", {
+  verbose: console.log,
+});
 const provinces = require("./provinces.json");
 
 const initDb = () => {
@@ -10,7 +12,6 @@ const initDb = () => {
         longitude real
       )
     `);
-
 
   const createUserTable = db.prepare(`
       create table if not exists users (
@@ -25,7 +26,7 @@ const initDb = () => {
     createUserTable.run();
 
     const insertProvinces = db.prepare(
-      "insert or ignore into provinces (id, name, latitude, longitude) values (?, ?, ?, ?)"
+      "insert or ignore into provinces (id, name, latitude, longitude) values (?, ?, ?, ?)",
     );
     provinces.forEach(({ id, name, latitude, longitude }) => {
       insertProvinces.run(id, name, latitude, longitude);
@@ -45,7 +46,7 @@ initDb();
  */
 function createUser(lineUserId, provinceId) {
   const insertUser = db.prepare(
-    "insert into users (lineUserId, provinceId) values (?, ?)"
+    "insert into users (lineUserId, provinceId) values (?, ?)",
   );
   insertUser.run(lineUserId, provinceId);
 }
@@ -58,7 +59,7 @@ function createUser(lineUserId, provinceId) {
  */
 function updateUser(lineUserId, provinceId) {
   const updateUser = db.prepare(
-    "update users set provinceId = ? where lineUserId = ?"
+    "update users set provinceId = ? where lineUserId = ?",
   );
   updateUser.run(provinceId, lineUserId);
 }
@@ -81,7 +82,7 @@ function deleteUser(lineUserId) {
  */
 function getCurrentProvinceNameOfUser(lineUserId) {
   const selectUser = db.prepare(
-    "select p.name from provinces p join users u on p.id = u.provinceId where u.lineUserId = ?"
+    "select p.name from provinces p join users u on p.id = u.provinceId where u.lineUserId = ?",
   );
   return selectUser.get(lineUserId);
 }
@@ -94,7 +95,7 @@ function getCurrentProvinceNameOfUser(lineUserId) {
  */
 function searchProvinceByName(name) {
   const selectProvince = db.prepare(
-    "select id, name from provinces where name = ?"
+    "select id, name from provinces where name = ?",
   );
   return selectProvince.get(name);
 }
@@ -106,7 +107,7 @@ function searchProvinceByName(name) {
  */
 function getProvincesThatHasUser() {
   const selectProvinces = db.prepare(
-    "select distinct p.id as id, p.name as name, latitude, longitude from provinces p join users u on p.id = u.provinceId"
+    "select distinct p.id as id, p.name as name, latitude, longitude from provinces p join users u on p.id = u.provinceId",
   );
   return selectProvinces.all();
 }
@@ -119,7 +120,7 @@ function getProvincesThatHasUser() {
  */
 function getUserByProvinceId(provinceId) {
   const selectUsers = db.prepare(
-    "select lineUserId from users where provinceId = ?"
+    "select lineUserId from users where provinceId = ?",
   );
   return selectUsers.all(provinceId);
 }

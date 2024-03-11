@@ -33,4 +33,28 @@ async function getDailyWeatherByLatLon(latitude, longitude) {
   };
 }
 
-module.exports = { getDailyWeatherByLatLon };
+async function getTodaysHourlyWeatherCodeByLatLon(latitude, longitude) {
+  const params = {
+    latitude: latitude,
+    longitude: longitude,
+    "hourly": ["precipitation_probability", "weather_code"],
+    "timezone": "Asia/Bangkok",
+    "forecast_days": 1
+  };
+
+  const url = "https://api.open-meteo.com/v1/forecast";
+  const responses = await fetchWeatherApi(url, params);
+  const response = responses[0];
+
+  const hourly = response.hourly();
+
+  const weatherCodes = hourly.variables(1).valuesArray();
+  const precipitationProbabilities = hourly.variables(0).valuesArray();
+
+  return {
+    weatherCodes,
+    precipitationProbabilities
+  };
+}
+
+module.exports = { getTodaysHourlyWeatherCodeByLatLon };

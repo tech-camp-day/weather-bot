@@ -11,7 +11,7 @@
   "tasks": {
     "y": {
       "name": "Start Dev",
-      "command": "npm dev",
+      "command": "npm run dev",
       "runAtStart": true,
       "preview": {
         "port": 3000
