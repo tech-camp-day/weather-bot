@@ -106,7 +106,7 @@ function searchProvinceByName(name) {
  */
 function getProvincesThatHasUser() {
   const selectProvinces = db.prepare(
-    "select distinct p.id, p.name from provinces p join users u on p.id = u.provinceId"
+    "select distinct p.id as id, p.name as name, latitude, longitude from provinces p join users u on p.id = u.provinceId"
   );
   return selectProvinces.all();
 }

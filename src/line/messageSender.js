@@ -30,4 +30,11 @@ function send(event, ...messages) {
   });
 }
 
-module.exports = { reply, send };
+function sendMulticast(userIds, ...messages) {
+  client.multicast({
+    to: userIds,
+    messages: messages.map((message) => ({ type: 'text', text: message })),
+  });
+}
+
+module.exports = { reply, send, sendMulticast };
