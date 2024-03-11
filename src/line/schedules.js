@@ -49,7 +49,7 @@ function isWeatherCodeBad(weatherCode) {
   return weatherCode === 9 || weatherCode === 17 || weatherCode >= 20
 }
 
-cron.schedule("10 * * * *", alertBadWeather);
+cron.schedule("10 * * * *", alertBadWeather, { timezone: "Asia/Bangkok" });
 
 /**
  * สร้างรายงานสภาพอากาศประจำวันสำหรับแต่ละจังหวัดและส่งไปยังผู้ใช้ Line ที่เกี่ยวข้อง
@@ -82,4 +82,4 @@ async function dailyReport() {
   }
 }
 
-cron.schedule("30 8 * * *", dailyReport);
+cron.schedule("30 8 * * *", dailyReport, { timezone: "Asia/Bangkok" });
