@@ -3,7 +3,7 @@ const { DateTime } = require("luxon");
 
 const { sendMulticast } = require("./messageSender");
 const { getProvincesThatHasUser, getUserByProvinceId } = require("../data/db");
-const { getDailyWeatherByLatLon, getTodaysHourlyWeatherCodeByLatLon } = require("../weather/openmeteo");\
+const { getDailyWeatherByLatLon, getTodaysHourlyWeatherCodeByLatLon } = require("../weather/openmeteo");
 
 const weatherCodeDescr = require("../weather/weatherCodes");
 
