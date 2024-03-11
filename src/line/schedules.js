@@ -33,8 +33,7 @@ async function alertBadWeather() {
       sendMulticast(
         lineUserIds,
         `!!! เตือนภัยอากาศ !!!
-${weatherCodeDescr[weatherCodes[currentHour + 1]]}ในอีก 1 ชั่วโมงข้างหน้า
-โอกาสฝนตก ${precipitationProbabilities[currentHour + 1]}%`,
+${weatherCodeDescr[weatherCodes[currentHour + 1]]}ในอีก 1 ชั่วโมงข้างหน้า, โอกาสฝนตก ${precipitationProbabilities[currentHour + 1]}%`,
       );
     }
   }
