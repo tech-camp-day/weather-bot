@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const lineWebhook = require("./routes/line-webhook");
+require("./line/schedules");
 
 const app = express();
 
