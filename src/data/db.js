@@ -1,11 +1,15 @@
-const db = require('better-sqlite3')('weather-bot.db', { verbose: console.log });
-
+const db = require("better-sqlite3")("weather-bot.db", {
+  verbose: console.log,
+});
+const provinces = require("./provinces.json");
 
 const initDb = () => {
   const createProvinceTable = db.prepare(`
       create table if not exists provinces (
         id integer primary key,
-        name text
+        name text,
+        latitude real,
+        longitude real
       )
     `);
 
@@ -20,6 +24,13 @@ const initDb = () => {
   const createAllTables = db.transaction(() => {
     createProvinceTable.run();
     createUserTable.run();
+
+    const insertProvinces = db.prepare(
+      "insert or ignore into provinces (id, name, latitude, longitude) values (?, ?, ?, ?)",
+    );
+    provinces.forEach(({ id, name, latitude, longitude }) => {
+      insertProvinces.run(id, name, latitude, longitude);
+    });
   });
 
   createAllTables();
@@ -34,7 +45,9 @@ initDb();
  * @param {number} provinceId - ไอดีของจังหวัดที่ผู้ใช้ต้องการ
  */
 function createUser(lineUserId, provinceId) {
-  const insertUser = db.prepare('insert into users (lineUserId, provinceId) values (?, ?)');
+  const insertUser = db.prepare(
+    "insert into users (lineUserId, provinceId) values (?, ?)",
+  );
   insertUser.run(lineUserId, provinceId);
 }
 
@@ -45,7 +58,9 @@ function createUser(lineUserId, provinceId) {
  * @param {number} provinceId - ไอดีใหม่ของจังหวัดที่ผู้ใช้ต้องการ
  */
 function updateUser(lineUserId, provinceId) {
-  const updateUser = db.prepare('update users set provinceId = ? where lineUserId = ?');
+  const updateUser = db.prepare(
+    "update users set provinceId = ? where lineUserId = ?",
+  );
   updateUser.run(provinceId, lineUserId);
 }
 
@@ -55,7 +70,7 @@ function updateUser(lineUserId, provinceId) {
  * @param {string} lineUserId - ไอดีผู้ใช้ของ Line
  */
 function deleteUser(lineUserId) {
-  const deleteUser = db.prepare('delete from users where lineUserId = ?');
+  const deleteUser = db.prepare("delete from users where lineUserId = ?");
   deleteUser.run(lineUserId);
 }
 
@@ -66,7 +81,9 @@ function deleteUser(lineUserId) {
  * @returns {string} ชื่อจังหวัดปัจจุบันของผู้ใช้
  */
 function getCurrentProvinceNameOfUser(lineUserId) {
-  const selectUser = db.prepare('select p.name from provinces p join users u on p.id = u.provinceId where u.lineUserId = ?');
+  const selectUser = db.prepare(
+    "select p.name from provinces p join users u on p.id = u.provinceId where u.lineUserId = ?",
+  );
   return selectUser.get(lineUserId);
 }
 
@@ -77,7 +94,9 @@ function getCurrentProvinceNameOfUser(lineUserId) {
  * @returns {object} ออบเจ็กต์จังหวัดที่มีไอดีและชื่อ
  */
 function searchProvinceByName(name) {
-  const selectProvince = db.prepare('select id, name from provinces where name = ?');
+  const selectProvince = db.prepare(
+    "select id, name from provinces where name = ?",
+  );
   return selectProvince.get(name);
 }
 
@@ -87,7 +106,9 @@ function searchProvinceByName(name) {
  * @returns {Array} อาร์เรย์ของออบเจ็กต์จังหวัดที่มีไอดีและชื่อ
  */
 function getProvincesThatHasUser() {
-  const selectProvinces = db.prepare('select distinct p.id, p.name from provinces p join users u on p.id = u.provinceId');
+  const selectProvinces = db.prepare(
+    "select distinct p.id as id, p.name as name, latitude, longitude from provinces p join users u on p.id = u.provinceId",
+  );
   return selectProvinces.all();
 }
 
@@ -98,7 +119,9 @@ function getProvincesThatHasUser() {
  * @returns {Array} อาร์เรย์ของไอดีผู้ใช้ของ Line
  */
 function getUserByProvinceId(provinceId) {
-  const selectUsers = db.prepare('select lineUserId from users where provinceId = ?');
+  const selectUsers = db.prepare(
+    "select lineUserId from users where provinceId = ?",
+  );
   return selectUsers.all(provinceId);
 }
 
@@ -109,5 +132,5 @@ module.exports = {
   getCurrentProvinceNameOfUser,
   searchProvinceByName,
   getProvincesThatHasUser,
-  getUserByProvinceId
+  getUserByProvinceId,
 };

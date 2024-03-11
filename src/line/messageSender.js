@@ -30,4 +30,17 @@ function send(event, ...messages) {
   });
 }
 
-module.exports = { reply, send };
+/**
+ * ส่งข้อความแบบ multicast ไปยังผู้ใช้หลายคน
+ *
+ * @param {string[]} userIds - อาร์เรย์ของ user ID เพื่อส่งข้อความไปยังผู้ใช้
+ * @param {...string} messages - ข้อความที่จะส่ง
+ */
+function sendMulticast(userIds, ...messages) {
+  client.multicast({
+    to: userIds,
+    messages: messages.map((message) => ({ type: 'text', text: message })),
+  });
+}
+
+module.exports = { reply, send, sendMulticast };
