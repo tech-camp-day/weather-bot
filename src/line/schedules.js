@@ -2,10 +2,10 @@ const cron = require("node-cron");
 const { DateTime } = require("luxon");
 
 const { sendMulticast } = require("./messageSender");
-const { getTodaysHourlyWeatherCodeByLatLon } = require("../weather/openmeteo");
-const weatherCodeDescr = require("../weather/weatherCodes");
-
 const { getProvincesThatHasUser, getUserByProvinceId } = require("../data/db");
+const { getDailyWeatherByLatLon, getTodaysHourlyWeatherCodeByLatLon } = require("../weather/openmeteo");\
+
+const weatherCodeDescr = require("../weather/weatherCodes");
 
 /**
  * ส่งการแจ้งเตือนสภาพอากาศให้กับผู้ใช้ในจังหวัดที่กำหนดตามเงื่อนไขของสภาพอากาศ

@@ -1,5 +1,16 @@
 const { fetchWeatherApi } = require("openmeteo");
 
+/**
+ * ดึงข้อมูลสภาพอากาศรายวันสำหรับละติจูดและลองจิจูดที่กำหนด
+ *
+ * @param {number} latitude - ละติจูดของสถานที่
+ * @param {number} longitude - ลองจิจูดของสถานที่
+ * @returns {Object} ออบเจ็กต์ที่มีข้อมูลสภาพอากาศรายวัน
+ * @property {number} weatherCode - รหัสสภาพอากาศ
+ * @property {number} temperature2mMax - อุณหภูมิสูงสุดที่ 2 เมตรเหนือระดับพื้นดิน
+ * @property {number} temperature2mMin - อุณหภูมิต่ำสุดที่ 2 เมตรเหนือระดับพื้นดิน
+ * @property {number} precipitationProbability - ความน่าจะเป็นของการตกฝน
+ */
 async function getDailyWeatherByLatLon(latitude, longitude) {
   const params = {
     latitude: latitude,
@@ -33,6 +44,12 @@ async function getDailyWeatherByLatLon(latitude, longitude) {
   };
 }
 
+/**
+ * ดึงรหัสสภาพอากาศรายชั่วโมงและความน่าจะเป็นของการตกฝนในวันนี้ตามละติจูดและลองจิจูด
+ * @param {number} latitude - ละติจูดของสถานที่
+ * @param {number} longitude - ลองจิจูดของสถานที่
+ * @returns {Object} ออบเจ็กต์ที่มีรหัสสภาพอากาศและความน่าจะเป็นของการตกฝน
+ */
 async function getTodaysHourlyWeatherCodeByLatLon(latitude, longitude) {
   const params = {
     latitude: latitude,
@@ -57,4 +74,4 @@ async function getTodaysHourlyWeatherCodeByLatLon(latitude, longitude) {
   };
 }
 
-module.exports = { getTodaysHourlyWeatherCodeByLatLon };
+module.exports = { getDailyWeatherByLatLon, getTodaysHourlyWeatherCodeByLatLon };
