@@ -15,6 +15,7 @@ const weatherCodeDescr = require("../weather/weatherCodes");
  * @returns {Promise<void>} Promise ที่ resolve เมื่อส่งการแจ้งเตือนทั้งหมดเสร็จสิ้น
  */
 async function alertBadWeather() {
+  console.log("alertBadWeather started!");
   const provinces = getProvincesThatHasUser();
 
   for (const province of provinces) {
@@ -55,6 +56,7 @@ cron.schedule("5 * * * *", alertBadWeather);
  * @returns {Promise<void>} Promise ที่ resolve เมื่อส่งรายงานสภาพอากาศเสร็จสิ้น
  */
 async function dailyReport() {
+  console.log("dailyReport started!");
   const provinces = getProvincesThatHasUser();
 
   for await (const province of provinces) {
@@ -80,4 +82,4 @@ async function dailyReport() {
   }
 }
 
-cron.schedule("0 8 * * *", dailyReport);
+cron.schedule("30 8 * * *", dailyReport);
