@@ -38,6 +38,7 @@ function handleFollow(event) {
     "สวัสดีครับ ผมคือ Weather Bot คุณสามารถเลือกจังหวัดที่ต้องการรับข้อมูลอากาศได้เลยครับ",
     "คุณพี่อยู่จังหวัดอะไรครับ?",
   );
+  createUser(event.source.userId, 1);
 }
 
 /**
@@ -66,7 +67,7 @@ function handleMessage(event) {
       updateUser(event.source.userId, newProvince.id);
       reply(
         event,
-        `เปลี่ยนจากจังหวัด${currentProvince.name}เป็นจังหวัด${newProvince.name} เรียบร้อย ผมจะส่งข้อมูลอากาศให้คุณทุกวันครับ`,
+        `เปลี่ยนจากจังหวัด${currentProvince.name}เป็นจังหวัด${newProvince.name} เรียบร้อย เราจะส่งข้อมูลอากาศให้คุณทุกวันครับ`,
       );
     } else {
       createUser(event.source.userId, newProvince.id);
