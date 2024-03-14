@@ -22,6 +22,24 @@ spec:
             value: ${LINE_CHANNEL_ACCESS_TOKEN}
           - name: LINE_CHANNEL_SECRET
             value: ${LINE_CHANNEL_SECRET}
+        volumeMounts:
+          - name: weather-bot-db
+            mountPath: /app/db
+      volumes:
+        - name: weather-bot-db
+          persistentVolumeClaim:
+            claimName: weather-bot-pvc
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: weather-bot-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service

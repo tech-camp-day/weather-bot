@@ -1,6 +1,4 @@
-const db = require("better-sqlite3")("weather-bot.db", {
-  verbose: console.log,
-});
+const db = require("better-sqlite3")("./db/weather-bot.db", { verbose: console.log }); 
 const provinces = require("./provinces.json");
 
 const initDb = () => {
