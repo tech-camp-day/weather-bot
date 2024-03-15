@@ -54,8 +54,9 @@ function handleUnfollow(event) {
  * @param {object} event - อ็อบเจ็กต์เหตุการณ์
  */
 function handleMessage(event) {
-  if (event.message.type !== "text") {
+  if (event.message.type !== 'text') {
     reply(event, "ขอโทษครับ ผมไม่เข้าใจข้อความที่คุณส่งมา");
+    return;
   }
 
   const newProvince = searchProvinceByName(event.message.text);
