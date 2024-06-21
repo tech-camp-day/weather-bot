@@ -13,6 +13,9 @@ RUN npm install --only=production
 # Copy the rest of the application code to the working directory
 COPY src/ ./src/
 
+# Hotfix
+RUN mkdir -p /app/db
+
 # Expose the port on which the server will run
 EXPOSE 3000
 
