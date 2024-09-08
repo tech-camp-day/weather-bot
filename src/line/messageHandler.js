@@ -70,10 +70,10 @@ function handleMessage(event, txt, lang) {
     const currentProvince = getCurrentProvinceNameOfUser(event.source.userId);
 
     if (currentProvince) {
-      updateUser(event.source.userId, newProvince.id);
+      updateUser(event.source.userId, newProvince.provinceId);
       reply(event, txt.UPDATE_COMPLETE);
     } else {
-      createUser(event.source.userId, newProvince.id, lang);
+      createUser(event.source.userId, newProvince.provinceId, lang);
       reply(event, txt.SELECT_COMPLETE);
     }
   } else {
