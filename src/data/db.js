@@ -1,4 +1,6 @@
-const db = require("better-sqlite3")("./db/weather-bot.db", { verbose: console.log }); 
+const db = require("better-sqlite3")("./db/weather-bot.db", {
+  verbose: console.log,
+});
 const provinces = require("./provinces.json");
 
 const initDb = () => {
@@ -11,10 +13,20 @@ const initDb = () => {
       )
     `);
 
+  const createProvinceAliasTable = db.prepare(`
+      create table if not exists province_aliases (
+        id integer primary key autoincrement,
+        alias text,
+        provinceId integer,
+        foreign key(provinceId) references provinces(id)
+      )
+    `);
+
   const createUserTable = db.prepare(`
       create table if not exists users (
         lineUserId text primary key,
         provinceId integer,
+        lang text,
         foreign key(provinceId) references provinces(id)
       )
     `);
@@ -22,12 +34,20 @@ const initDb = () => {
   const createAllTables = db.transaction(() => {
     createProvinceTable.run();
     createUserTable.run();
+    createProvinceAliasTable.run();
 
     const insertProvinces = db.prepare(
-      "insert or ignore into provinces (id, name, latitude, longitude) values (?, ?, ?, ?)",
+      "insert or ignore into provinces (id, name, latitude, longitude) values (?, ?, ?, ?)"
     );
-    provinces.forEach(({ id, name, latitude, longitude }) => {
+    const insertProvinceAliases = db.prepare(
+      "insert or ignore into province_aliases (alias, provinceId) values (?, ?)"
+    );
+    provinces.forEach(({ id, name, latitude, longitude, aliases }) => {
       insertProvinces.run(id, name, latitude, longitude);
+
+      aliases.forEach((alias) => {
+        insertProvinceAliases.run(alias, id);
+      });
     });
   });
 
@@ -42,11 +62,11 @@ initDb();
  * @param {string} lineUserId - ไอดีผู้ใช้ของ Line
  * @param {number} provinceId - ไอดีของจังหวัดที่ผู้ใช้ต้องการ
  */
-function createUser(lineUserId, provinceId) {
+function createUser(lineUserId, provinceId, lang) {
   const insertUser = db.prepare(
-    "insert into users (lineUserId, provinceId) values (?, ?)",
+    "insert into users (lineUserId, provinceId, lang) values (?, ?, ?)"
   );
-  insertUser.run(lineUserId, provinceId);
+  insertUser.run(lineUserId, provinceId, lang);
 }
 
 /**
@@ -57,7 +77,7 @@ function createUser(lineUserId, provinceId) {
  */
 function updateUser(lineUserId, provinceId) {
   const updateUser = db.prepare(
-    "update users set provinceId = ? where lineUserId = ?",
+    "update users set provinceId = ? where lineUserId = ?"
   );
   updateUser.run(provinceId, lineUserId);
 }
@@ -80,7 +100,7 @@ function deleteUser(lineUserId) {
  */
 function getCurrentProvinceNameOfUser(lineUserId) {
   const selectUser = db.prepare(
-    "select p.name from provinces p join users u on p.id = u.provinceId where u.lineUserId = ?",
+    "select p.name from provinces p join users u on p.id = u.provinceId where u.lineUserId = ?"
   );
   return selectUser.get(lineUserId);
 }
@@ -93,7 +113,7 @@ function getCurrentProvinceNameOfUser(lineUserId) {
  */
 function searchProvinceByName(name) {
   const selectProvince = db.prepare(
-    "select id, name from provinces where name = ?",
+    "select provinceId from province_aliases where alias = ?"
   );
   return selectProvince.get(name);
 }
@@ -105,7 +125,7 @@ function searchProvinceByName(name) {
  */
 function getProvincesThatHasUser() {
   const selectProvinces = db.prepare(
-    "select distinct p.id as id, p.name as name, latitude, longitude from provinces p join users u on p.id = u.provinceId",
+    "select distinct p.id as id, p.name as name, latitude, longitude from provinces p join users u on p.id = u.provinceId"
   );
   return selectProvinces.all();
 }
@@ -118,7 +138,7 @@ function getProvincesThatHasUser() {
  */
 function getUserByProvinceId(provinceId) {
   const selectUsers = db.prepare(
-    "select lineUserId from users where provinceId = ?",
+    "select lineUserId, lang from users where provinceId = ?"
   );
   return selectUsers.all(provinceId);
 }

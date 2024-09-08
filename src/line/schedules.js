@@ -3,15 +3,19 @@ const { DateTime } = require("luxon");
 
 const { sendMulticast } = require("./messageSender");
 const { getProvincesThatHasUser, getUserByProvinceId } = require("../data/db");
-const { getDailyWeatherByLatLon, getTodaysHourlyWeatherCodeByLatLon } = require("../weather/openmeteo");
+const {
+  getDailyWeatherByLatLon,
+  getTodaysHourlyWeatherCodeByLatLon,
+} = require("../weather/openmeteo");
 
 const weatherCodeDescr = require("../weather/weatherCodes");
+const MESSAGE_LANG = require("./message");
 
 /**
  * ส่งการแจ้งเตือนสภาพอากาศให้กับผู้ใช้ในจังหวัดที่กำหนดตามเงื่อนไขของสภาพอากาศ
  * ดึงรหัสสภาพอากาศและโอกาสฝนตกสำหรับแต่ละจังหวัด
  * และส่งการแจ้งเตือนให้กับผู้ใช้หากสภาพอากาศคาดว่าจะแย่ลงในชั่วโมงถัดไป
- * 
+ *
  * @returns {Promise<void>} Promise ที่ resolve เมื่อส่งการแจ้งเตือนทั้งหมดเสร็จสิ้น
  */
 async function alertBadWeather() {
@@ -19,23 +23,38 @@ async function alertBadWeather() {
   const provinces = getProvincesThatHasUser();
 
   for (const province of provinces) {
-    const {
-      weatherCodes,
-      precipitationProbabilities,
-    } = await getTodaysHourlyWeatherCodeByLatLon(province.latitude, province.longitude);
+    const { weatherCodes, precipitationProbabilities } =
+      await getTodaysHourlyWeatherCodeByLatLon(
+        province.latitude,
+        province.longitude
+      );
 
     const currentHour = DateTime.now().setZone("Asia/Bangkok").hour;
 
-    if (!isWeatherCodeBad(weatherCodes[currentHour]) && isWeatherCodeBad(weatherCodes[currentHour + 1])) {
-      const lineUserIds = getUserByProvinceId(province.id).map(
-        (user) => user.lineUserId,
-      );
+    if (
+      !isWeatherCodeBad(weatherCodes[currentHour]) &&
+      isWeatherCodeBad(weatherCodes[currentHour + 1])
+    ) {
+      const users = getUserByProvinceId(province.id);
+      const usersByLang = users.reduce((acc, user) => {
+        acc[user.lang] = acc[user.lang] || [];
+        acc[user.lang].push(user.lineUserId);
+        return acc;
+      }, {});
 
-      sendMulticast(
-        lineUserIds,
-        `!!! เตือนภัยอากาศ !!!
-${weatherCodeDescr[weatherCodes[currentHour + 1]]}ในอีก 1 ชั่วโมงข้างหน้า, โอกาสฝนตก ${precipitationProbabilities[currentHour + 1]}%`,
-      );
+      for (const lang in usersByLang) {
+        const lineUserIds = usersByLang[lang];
+        const weatherDescription =
+          weatherCodeDescr[lang][weatherCodes[currentHour + 1]];
+        const precipitationProbability =
+          precipitationProbabilities[currentHour + 1];
+        const message = MESSAGE_LANG[lang].WEATHER_ALERT.replace(
+          "{weatherDescription}",
+          weatherDescription
+        ).replace("{preciptationProbability}", precipitationProbability);
+
+        sendMulticast(lineUserIds, message);
+      }
     }
   }
 }
@@ -46,7 +65,7 @@ ${weatherCodeDescr[weatherCodes[currentHour + 1]]}ในอีก 1 ชั่ว
  * @returns {boolean} - คืนค่า true ถ้ารหัสสภาพอากาศแสดงถึงสภาพอากาศที่ไม่ดี มิฉะนั้นคืนค่า false
  */
 function isWeatherCodeBad(weatherCode) {
-  return weatherCode === 9 || weatherCode === 17 || weatherCode >= 20
+  return weatherCode === 9 || weatherCode === 17 || weatherCode >= 20;
 }
 
 cron.schedule("15 * * * *", alertBadWeather, { timezone: "Asia/Bangkok" });
@@ -67,18 +86,26 @@ async function dailyReport() {
       precipitationProbability,
     } = await getDailyWeatherByLatLon(province.latitude, province.longitude);
 
-    const lineUserIds = getUserByProvinceId(province.id).map(
-      (user) => user.lineUserId,
-    );
+    const users = getUserByProvinceId(province.id);
+    const usersByLang = users.reduce((acc, user) => {
+      acc[user.lang] = acc[user.lang] || [];
+      acc[user.lang].push(user.lineUserId);
+      return acc;
+    }, {});
 
-    sendMulticast(
-      lineUserIds,
-      "รายงานสภาพอากาศประจำวัน",
-      `สภาพอากาศวันนี้: ${weatherCodeDescr[weatherCode]}
-อุณหภูมิสูงสุด: ${Math.round(temperature2mMax)}°C
-อุณหภูมิต่ำสุด: ${Math.round(temperature2mMin)}°C
-โอกาสฝนตก: ${Math.round(precipitationProbability)}%`,
-    );
+    for (const lang in usersByLang) {
+      const lineUserIds = usersByLang[lang];
+      const weatherDescription = weatherCodeDescr[lang][weatherCode];
+      const message = MESSAGE_LANG[lang].WEATHER_REPORT.replace(
+        "{weatherDescription}",
+        weatherDescription
+      )
+        .replace("{maxTemp}", temperature2mMax)
+        .replace("{minTemp}", temperature2mMin)
+        .replace("{preciptationProbability}", precipitationProbability);
+
+      sendMulticast(lineUserIds, message);
+    }
   }
 }
 

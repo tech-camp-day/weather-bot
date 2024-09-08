@@ -1,4 +1,4 @@
-const { reply, send } = require("./messageSender");
+const { reply } = require("./messageSender");
 
 const {
   createUser,
@@ -7,38 +7,43 @@ const {
   getCurrentProvinceNameOfUser,
   searchProvinceByName,
 } = require("../data/db");
+const MESSAGE_LANG = require("./message");
 
 /**
  * จัดการกับเหตุการณ์ที่เข้ามา ตรวจสอบประเภทของเหตุการณ์ และส่งไปยังฟังก์ชันที่เหมาะสม
  * @param {object} event - อ็อบเจ็กต์เหตุการณ์
  */
-function handleEvent(event) {
-  switch (event.type) {
-    case "follow":
-      handleFollow(event);
-      break;
-    case "unfollow":
-      handleUnfollow(event);
-      break;
-    case "message":
-      handleMessage(event);
-      break;
-    default:
-      break;
+function handleEvent(lang) {
+  const languages = Object.keys(MESSAGE_LANG);
+  if (!languages.includes(lang)) {
+    console.warn(`Unknown language: ${lang}, using English as default`);
+    lang = "en";
   }
+
+  return (event) => {
+    const txt = MESSAGE_LANG[lang];
+    switch (event.type) {
+      case "message":
+        handleMessage(event, txt, lang);
+        break;
+      case "follow":
+        handleFollow(event, txt);
+        break;
+      case "unfollow":
+        handleUnfollow(event);
+        break;
+      default:
+        break;
+    }
+  };
 }
 
 /**
  * จัดการกับเหตุการณ์ 'follow'
  * @param {object} event - อ็อบเจ็กต์เหตุการณ์
  */
-function handleFollow(event) {
-  reply(
-    event,
-    "สวัสดีครับ ผมคือ Weather Bot คุณสามารถเลือกจังหวัดที่ต้องการรับข้อมูลอากาศได้เลยครับ",
-    "คุณพี่อยู่จังหวัดอะไรครับ?",
-  );
-  createUser(event.source.userId, 1);
+function handleFollow(event, txt) {
+  reply(event, txt.HELLO, txt.ASK_PROVINCE);
 }
 
 /**
@@ -53,9 +58,9 @@ function handleUnfollow(event) {
  * จัดการกับเหตุการณ์ 'message'
  * @param {object} event - อ็อบเจ็กต์เหตุการณ์
  */
-function handleMessage(event) {
-  if (event.message.type !== 'text') {
-    reply(event, "ขอโทษครับ ผมไม่เข้าใจข้อความที่คุณส่งมา");
+function handleMessage(event, txt, lang) {
+  if (event.message.type !== "text") {
+    reply(event, txt.SORRY);
     return;
   }
 
@@ -66,19 +71,13 @@ function handleMessage(event) {
 
     if (currentProvince) {
       updateUser(event.source.userId, newProvince.id);
-      reply(
-        event,
-        `เปลี่ยนจากจังหวัด${currentProvince.name}เป็นจังหวัด${newProvince.name} เรียบร้อย เราจะส่งข้อมูลอากาศให้คุณทุกวันครับ`,
-      );
+      reply(event, txt.UPDATE_COMPLETE);
     } else {
-      createUser(event.source.userId, newProvince.id);
-      reply(
-        event,
-        `เลือกจังหวัด${newProvince.name}เรียบร้อย ผมจะส่งข้อมูลอากาศให้คุณทุกวันครับ`,
-      );
+      createUser(event.source.userId, newProvince.id, lang);
+      reply(event, txt.SELECT_COMPLETE);
     }
   } else {
-    reply(event, "ขอโทษครับ ผมไม่พบข้อมูลจังหวัดที่คุณส่งมา");
+    reply(event, txt.NO_PROVINCE);
   }
 }
 

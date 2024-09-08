@@ -3,462 +3,539 @@
     "id": 1,
     "name": "กรุงเทพมหานคร",
     "latitude": 13.757,
-    "longitude": 100.555
+    "longitude": 100.555,
+    "aliases": ["กรุงเทพมหานคร", "กรุงเทพ", "กทม", "Bangkok", "BKK"]
   },
   {
     "id": 2,
     "name": "สมุทรปราการ",
     "latitude": 13.618,
-    "longitude": 100.659
+    "longitude": 100.659,
+    "aliases": ["สมุทรปราการ", "Samut Prakan", "SamutPrakan"]
   },
   {
     "id": 3,
     "name": "นนทบุรี",
     "latitude": 13.892,
-    "longitude": 100.432
+    "longitude": 100.432,
+    "aliases": ["นนทบุรี", "Nonthaburi", "Nonthaburee"]
   },
   {
     "id": 4,
     "name": "ปทุมธานี",
     "latitude": 14.048,
-    "longitude": 100.63
+    "longitude": 100.63,
+    "aliases": ["ปทุมธานี", "ปทุม", "Pathum Thani", "PathumThani", "Pathum"]
   },
   {
     "id": 5,
     "name": "พระนครศรีอยุธยา",
     "latitude": 14.374,
-    "longitude": 100.532
+    "longitude": 100.532,
+    "aliases": ["พระนครศรีอยุธยา", "อยุธยา", "Phra Nakhon Si Ayutthaya", "PhraNakhonSiAyutthaya", "Ayutthaya", "Auydhya"]
   },
   {
     "id": 6,
     "name": "อ่างทอง",
     "latitude": 14.613,
-    "longitude": 100.382
+    "longitude": 100.382,
+    "aliases": ["อ่างทอง", "Ang Thong", "AngThong"]
   },
   {
     "id": 7,
     "name": "ลพบุรี",
     "latitude": 15.033,
-    "longitude": 100.801
+    "longitude": 100.801,
+    "aliases": ["ลพบุรี", "Lop Buri", "LopBuri"]
   },
   {
     "id": 8,
     "name": "สิงห์บุรี",
     "latitude": 14.887,
-    "longitude": 100.359
+    "longitude": 100.359,
+    "aliases": ["สิงห์บุรี", "Sing Buri", "SingBuri"]
   },
   {
     "id": 9,
     "name": "ชัยนาท",
     "latitude": 15.151,
-    "longitude": 100.08
+    "longitude": 100.08,
+    "aliases": ["ชัยนาท", "Chai Nat", "ChaiNat"]
   },
   {
     "id": 10,
     "name": "สระบุรี",
     "latitude": 14.558,
-    "longitude": 100.891
+    "longitude": 100.891,
+    "aliases": ["สระบุรี", "Saraburi"]
   },
   {
     "id": 11,
     "name": "ชลบุรี",
     "latitude": 13.155,
-    "longitude": 101.067
+    "longitude": 101.067,
+    "aliases": ["ชลบุรี", "Chon Buri", "ChonBuri"]
   },
   {
     "id": 12,
     "name": "ระยอง",
     "latitude": 12.777,
-    "longitude": 101.418
+    "longitude": 101.418,
+    "aliases": ["ระยอง", "Rayong"]
   },
   {
     "id": 13,
     "name": "จันทบุรี",
     "latitude": 12.683,
-    "longitude": 102.114
+    "longitude": 102.114,
+    "aliases": ["จันทบุรี", "จัน", "Chanthaburi", "Chan"]
   },
   {
     "id": 14,
     "name": "ตราด",
     "latitude": 12.115,
-    "longitude": 102.494
+    "longitude": 102.494,
+    "aliases": ["ตราด", "Trat"]
   },
   {
     "id": 15,
     "name": "ฉะเชิงเทรา",
     "latitude": 13.682,
-    "longitude": 101.143
+    "longitude": 101.143,
+    "aliases": ["ฉะเชิงเทรา", "Chachoengsao"]
   },
   {
     "id": 16,
     "name": "ปราจีนบุรี",
     "latitude": 14.001,
-    "longitude": 101.535
+    "longitude": 101.535,
+    "aliases": ["ปราจีนบุรี", "ปราจีน", "Prachin Buri", "PrachinBuri", "Prachin"]
   },
   {
     "id": 17,
     "name": "นครนายก",
     "latitude": 14.184,
-    "longitude": 101.131
+    "longitude": 101.131,
+    "aliases": ["นครนายก", "Nakhon Nayok", "NakhonNayok"]
   },
   {
     "id": 18,
     "name": "สระแก้ว",
     "latitude": 13.726,
-    "longitude": 102.339
+    "longitude": 102.339,
+    "aliases": ["สระแก้ว", "Sa Kaeo", "SaKaeo"]
   },
   {
     "id": 19,
     "name": "นครราชสีมา",
     "latitude": 15.084,
-    "longitude": 102.198
+    "longitude": 102.198,
+    "aliases": ["นครราชสีมา", "โคราช", "Nakhon Ratchasima", "NakhonRatchasima", "Korat"]
   },
   {
     "id": 20,
     "name": "บุรีรัมย์",
     "latitude": 14.891,
-    "longitude": 102.973
+    "longitude": 102.973,
+    "aliases": ["บุรีรัมย์", "Buri Ram", "BuriRam", "Buriram"]
   },
   {
     "id": 21,
     "name": "สุรินทร์",
     "latitude": 14.934,
-    "longitude": 103.671
+    "longitude": 103.671,
+    "aliases": ["สุรินทร์", "Surin"]
   },
   {
     "id": 22,
     "name": "ศรีสะเกษ",
     "latitude": 14.939,
-    "longitude": 104.328
+    "longitude": 104.328,
+    "aliases": ["ศรีสะเกษ", "Si Sa Ket", "SiSaKet"]
   },
   {
     "id": 23,
     "name": "อุบลราชธานี",
     "latitude": 15.275,
-    "longitude": 105.023
+    "longitude": 105.023,
+    "aliases": ["อุบลราชธานี",  "อุบล", "Ubon Ratchathani", "UbonRatchathani", "Ubon"]
   },
   {
     "id": 24,
     "name": "ยโสธร",
     "latitude": 15.838,
-    "longitude": 104.305
+    "longitude": 104.305,
+    "aliases": ["ยโสธร", "Yasothon"]
   },
   {
     "id": 25,
     "name": "ชัยภูมิ",
     "latitude": 15.975,
-    "longitude": 101.937
+    "longitude": 101.937,
+    "aliases": ["ชัยภูมิ", "Chaiyaphum"]
   },
   {
     "id": 26,
     "name": "อำนาจเจริญ",
     "latitude": 15.858,
-    "longitude": 104.707
+    "longitude": 104.707,
+    "aliases": ["อำนาจเจริญ", "Amnat Charoen", "AmnatCharoen"]
   },
   {
     "id": 27,
     "name": "หนองบัวลำภู",
     "latitude": 17.179,
-    "longitude": 102.312
+    "longitude": 102.312,
+    "aliases": ["หนองบัวลำภู", "Nong Bua Lam Phu", "NongBuaLamPhu"]
   },
   {
     "id": 28,
     "name": "ขอนแก่น",
     "latitude": 16.355,
-    "longitude": 102.597
+    "longitude": 102.597,
+    "aliases": ["ขอนแก่น", "Khon Kaen", "KhonKaen"]
   },
   {
     "id": 29,
     "name": "อุดรธานี",
     "latitude": 17.408,
-    "longitude": 102.888
+    "longitude": 102.888,
+    "aliases": ["อุดรธานี", "อุดร", "Udon Thani", "UdonThani", "Udon"]
   },
   {
     "id": 30,
     "name": "เลย",
     "latitude": 17.412,
-    "longitude": 101.645
+    "longitude": 101.645,
+    "aliases": ["เลย", "Loei"]
   },
   {
     "id": 31,
     "name": "หนองคาย",
     "latitude": 17.915,
-    "longitude": 102.797
+    "longitude": 102.797,
+    "aliases": ["หนองคาย", "Nong Khai", "NongKhai"]
   },
   {
     "id": 32,
     "name": "มหาสารคาม",
     "latitude": 15.992,
-    "longitude": 103.187
+    "longitude": 103.187,
+    "aliases": ["มหาสารคาม", "Maha Sarakham", "MahaSarakham"]
   },
   {
     "id": 33,
     "name": "ร้อยเอ็ด",
     "latitude": 15.94,
-    "longitude": 103.801
+    "longitude": 103.801,
+    "aliases": ["ร้อยเอ็ด", "Roi Et", "RoiEt"]
   },
   {
     "id": 34,
     "name": "กาฬสินธุ์",
     "latitude": 16.59,
-    "longitude": 103.613
+    "longitude": 103.613,
+    "aliases": ["กาฬสินธุ์", "Kalasin"]
   },
   {
     "id": 35,
     "name": "สกลนคร",
     "latitude": 17.398,
-    "longitude": 103.83
+    "longitude": 103.83,
+    "aliases": ["สกลนคร", "Sakon Nakhon", "SakonNakhon"]
   },
   {
     "id": 36,
     "name": "นครพนม",
     "latitude": 17.312,
-    "longitude": 104.482
+    "longitude": 104.482,
+    "aliases": ["นครพนม", "Nakhon Phanom", "NakhonPhanom"]
   },
   {
     "id": 37,
     "name": "มุกดาหาร",
     "latitude": 16.539,
-    "longitude": 104.561
+    "longitude": 104.561,
+    "aliases": ["มุกดาหาร", "Mukdahan"]
   },
   {
     "id": 38,
     "name": "เชียงใหม่",
     "latitude": 18.857,
-    "longitude": 98.917
+    "longitude": 98.917,
+    "aliases": ["เชียงใหม่", "Chiang Mai", "ChiangMai", "CNX"]
   },
   {
     "id": 39,
     "name": "ลำพูน",
     "latitude": 18.346,
-    "longitude": 98.959
+    "longitude": 98.959,
+    "aliases": ["ลำพูน", "Lamphun"]
   },
   {
     "id": 40,
     "name": "ลำปาง",
     "latitude": 18.34,
-    "longitude": 99.502
+    "longitude": 99.502,
+    "aliases": ["ลำปาง", "Lampang"]
   },
   {
     "id": 41,
     "name": "อุตรดิตถ์",
     "latitude": 17.639,
-    "longitude": 100.327
+    "longitude": 100.327,
+    "aliases": ["อุตรดิตถ์", "Uttaradit"]
   },
   {
     "id": 42,
     "name": "แพร่",
     "latitude": 18.162,
-    "longitude": 100.099
+    "longitude": 100.099,
+    "aliases": ["แพร่", "Phrae"]
   },
   {
     "id": 43,
     "name": "น่าน",
     "latitude": 18.88,
-    "longitude": 100.807
+    "longitude": 100.807,
+    "aliases": ["น่าน", "Nan"]
   },
   {
     "id": 44,
     "name": "พะเยา",
     "latitude": 19.288,
-    "longitude": 100.094
+    "longitude": 100.094,
+    "aliases": ["พะเยา", "Phayao"]
   },
   {
     "id": 45,
     "name": "เชียงราย",
     "latitude": 19.883,
-    "longitude": 99.919
+    "longitude": 99.919,
+    "aliases": ["เชียงราย", "Chiang Rai", "ChiangRai", "CEI"]
   },
   {
     "id": 46,
     "name": "แม่ฮ่องสอน",
     "latitude": 18.754,
-    "longitude": 98.053
+    "longitude": 98.053,
+    "aliases": ["แม่ฮ่องสอน", "Mae Hong Son", "MaeHongSon"]
   },
   {
     "id": 47,
     "name": "นครสวรรค์",
     "latitude": 15.679,
-    "longitude": 100.186
+    "longitude": 100.186,
+    "aliases": ["นครสวรรค์", "Nakhon Sawan", "NakhonSawan"]
   },
   {
     "id": 48,
     "name": "อุทัยธานี",
     "latitude": 15.371,
-    "longitude": 99.793
+    "longitude": 99.793,
+    "aliases": ["อุทัยธานี", "อุทัย", "Uthai Thani", "UthaiThani", "Uthai"]
   },
   {
     "id": 49,
     "name": "กำแพงเพชร",
     "latitude": 16.368,
-    "longitude": 99.65
+    "longitude": 99.65,
+    "aliases": ["กำแพงเพชร", "Kamphaeng Phet", "KamphaengPhet"]
   },
   {
     "id": 50,
     "name": "ตาก",
     "latitude": 16.849,
-    "longitude": 98.832
+    "longitude": 98.832,
+    "aliases": ["ตาก", "Tak"]
   },
   {
     "id": 51,
     "name": "สุโขทัย",
     "latitude": 17.156,
-    "longitude": 99.795
+    "longitude": 99.795,
+    "aliases": ["สุโขทัย", "Sukhothai"]
   },
   {
     "id": 52,
     "name": "พิษณุโลก",
     "latitude": 16.876,
-    "longitude": 100.38
+    "longitude": 100.38,
+    "aliases": ["พิษณุโลก", "Phitsanulok"]
   },
   {
     "id": 53,
     "name": "พิจิตร",
     "latitude": 16.258,
-    "longitude": 100.357
+    "longitude": 100.357,
+    "aliases": ["พิจิตร", "Phichit"]
   },
   {
     "id": 54,
     "name": "เพชรบูรณ์",
     "latitude": 16.276,
-    "longitude": 101.112
+    "longitude": 101.112,
+    "aliases": ["เพชรบูรณ์", "Phetchabun"]
   },
   {
     "id": 55,
     "name": "ราชบุรี",
     "latitude": 13.601,
-    "longitude": 99.798
+    "longitude": 99.798,
+    "aliases": ["ราชบุรี", "Ratchaburi"]
   },
   {
     "id": 56,
     "name": "กาญจนบุรี",
     "latitude": 14.233,
-    "longitude": 99.434
+    "longitude": 99.434,
+    "aliases": ["กาญจนบุรี", "กาญ", "Kanchanaburi", "Kan"]
   },
   {
     "id": 57,
     "name": "สุพรรณบุรี",
     "latitude": 14.54,
-    "longitude": 100.009
+    "longitude": 100.009,
+    "aliases": ["สุพรรณบุรี", "สุพรรณ", "Suphan Buri", "SuphanBuri", "Suphanburi", "Suphan"]
   },
   {
     "id": 58,
     "name": "นครปฐม",
     "latitude": 13.875,
-    "longitude": 100.122
+    "longitude": 100.122,
+    "aliases": ["นครปฐม", "Nakhon Pathom", "NakhonPathom"]
   },
   {
     "id": 59,
     "name": "สมุทรสาคร",
     "latitude": 13.587,
-    "longitude": 100.218
+    "longitude": 100.218,
+    "aliases": ["สมุทรสาคร", "Samut Sakhon", "SamutSakhon"]
   },
   {
     "id": 60,
     "name": "สมุทรสงคราม",
     "latitude": 13.43,
-    "longitude": 99.955
+    "longitude": 99.955,
+    "aliases": ["สมุทรสงคราม", "Samut Songkhram", "SamutSongkhram"]
   },
   {
     "id": 61,
     "name": "เพชรบุรี",
     "latitude": 13.044,
-    "longitude": 99.875
+    "longitude": 99.875,
+    "aliases": ["เพชรบุรี", "Phetchaburi"]
   },
   {
     "id": 62,
     "name": "ประจวบคีรีขันธ์",
     "latitude": 11.885,
-    "longitude": 99.669
+    "longitude": 99.669,
+    "aliases": ["ประจวบคีรีขันธ์","ประจวบ", "Prachuap Khiri Khan", "PrachuapKhiriKhan", "Prachuap"]
   },
   {
     "id": 63,
     "name": "นครศรีธรรมราช",
     "latitude": 8.348,
-    "longitude": 99.861
+    "longitude": 99.861,
+    "aliases": ["นครศรีธรรมราช", "นครศรี", "Nakhon Si Thammarat", "NakhonSiThammarat", "Nakhon Si", "NakhonSi"]
   },
   {
     "id": 64,
     "name": "กระบี่",
     "latitude": 8.014,
-    "longitude": 98.933
+    "longitude": 98.933,
+    "aliases": ["กระบี่", "Krabi"]
   },
   {
     "id": 65,
     "name": "พังงา",
     "latitude": 8.644,
-    "longitude": 98.277
+    "longitude": 98.277,
+    "aliases": ["พังงา", "Phang Nga", "PhangNga"]
   },
   {
     "id": 66,
     "name": "ภูเก็ต",
     "latitude": 7.891,
-    "longitude": 98.366
+    "longitude": 98.366,
+    "aliases": ["ภูเก็ต", "Phuket", "HKT"]
   },
   {
     "id": 67,
     "name": "สุราษฎร์ธานี",
     "latitude": 9.228,
-    "longitude": 99.402
+    "longitude": 99.402,
+    "aliases": ["สุราษฎร์ธานี", "สุราษ", "Surat Thani", "SuratThani", "Surat"]
   },
   {
     "id": 68,
     "name": "ระนอง",
     "latitude": 9.836,
-    "longitude": 98.572
+    "longitude": 98.572,
+    "aliases": ["ระนอง", "Ranong"]
   },
   {
     "id": 69,
     "name": "ชุมพร",
     "latitude": 10.337,
-    "longitude": 99.185
+    "longitude": 99.185,
+    "aliases": ["ชุมพร", "Chumphon", "Chumporn"]
   },
   {
     "id": 70,
     "name": "สงขลา",
     "latitude": 7.117,
-    "longitude": 100.519
+    "longitude": 100.519,
+    "aliases": ["สงขลา", "Songkhla", "Songkla"]
   },
   {
     "id": 71,
     "name": "สตูล",
     "latitude": 6.698,
-    "longitude": 99.731
+    "longitude": 99.731,
+    "aliases": ["สตูล", "Satun"]
   },
   {
     "id": 72,
     "name": "ตรัง",
     "latitude": 7.478,
-    "longitude": 99.557
+    "longitude": 99.557,
+    "aliases": ["ตรัง", "Trang"]
   },
   {
     "id": 73,
     "name": "พัทลุง",
     "latitude": 7.543,
-    "longitude": 100.066
+    "longitude": 100.066,
+    "aliases": ["พัทลุง", "Phatthalung", "Pattalung"]
   },
   {
     "id": 74,
     "name": "ปัตตานี",
     "latitude": 6.755,
-    "longitude": 101.36
+    "longitude": 101.36,
+    "aliases": ["ปัตตานี", "Pattani"]
   },
   {
     "id": 75,
     "name": "ยะลา",
     "latitude": 6.382,
-    "longitude": 101.263
+    "longitude": 101.263,
+    "aliases": ["ยะลา", "Yala"]
   },
   {
     "id": 76,
     "name": "นราธิวาส",
     "latitude": 6.231,
-    "longitude": 101.751
+    "longitude": 101.751,
+    "aliases": ["นราธิวาส", "Narathiwat"]
   },
   {
     "id": 77,
     "name": "บึงกาฬ",
     "latitude": 18.159,
-    "longitude": 103.676
+    "longitude": 103.676,
+    "aliases": ["บึงกาฬ", "Bueng Kan", "BuengKan"]
   }
 ]

@@ -10,9 +10,11 @@ const config = {
   channelSecret: process.env.LINE_CHANNEL_SECRET
 };
 
-router.post('/', line.middleware(config), (req, res) => {
+router.post('/:lang', line.middleware(config), (req, res) => {
+  const lang = req.params.lang;
+  
   Promise
-    .all(req.body.events.map(handleEvent))
+    .all(req.body.events.map(handleEvent(lang)))
     .then((result) => res.json(result));
 });
 
