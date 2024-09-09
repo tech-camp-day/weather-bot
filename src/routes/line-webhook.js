@@ -5,16 +5,16 @@ const { handleEvent } = require('../line/messageHandler');
 
 const router = express.Router();
 
+const BOT_LANG = process.env.BOT_LANG || 'en';
+
 const config = {
   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
   channelSecret: process.env.LINE_CHANNEL_SECRET
 };
 
-router.post('/:lang', line.middleware(config), (req, res) => {
-  const lang = req.params.lang;
-  
+router.post('/', line.middleware(config), (req, res) => {
   Promise
-    .all(req.body.events.map(handleEvent(lang)))
+    .all(req.body.events.map(handleEvent(BOT_LANG)))
     .then((result) => res.json(result));
 });
 

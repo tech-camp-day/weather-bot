@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: weather-bot-deployment
+  name: weather-bot-en-deployment
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: weather-bot
+      app: weather-bot-en
   template:
     metadata:
       labels:
-        app: weather-bot
+        app: weather-bot-en
     spec:
       containers:
-      - name: weather-bot
+      - name: weather-bot-en
         image: ${IMAGE}
         ports:
         - containerPort: 3000
@@ -37,7 +37,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: weather-bot-pvc
+  name: weather-bot-en-pvc
 spec:
   accessModes:
     - ReadWriteOnce
@@ -48,7 +48,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: weather-bot-service
+  name: weather-bot-en-service
 spec:
   type: ClusterIP
   ports:
@@ -67,7 +67,7 @@ metadata:
 spec:
   tls:
   - hosts: [${DOMAIN}]
-    secretName: weather-bot-tls
+    secretName: weather-bot-eb-tls
   rules:
     - host: ${DOMAIN}
       http:
