@@ -100,9 +100,9 @@ async function dailyReport() {
         "{weatherDescription}",
         weatherDescription
       )
-        .replace("{maxTemp}", temperature2mMax)
-        .replace("{minTemp}", temperature2mMin)
-        .replace("{preciptationProbability}", precipitationProbability);
+        .replace("{maxTemp}", Math.round(temperature2mMax))
+        .replace("{minTemp}", Math.round(temperature2mMin))
+        .replace("{preciptationProbability}", Math.round(precipitationProbability));
 
       sendMulticast(lineUserIds, message);
     }
